@@ -5,6 +5,13 @@ We know that splitting content into several tabs is easy, but doing well, clean,
 
 Bettertabs is a simple `Rails 3.1+ Engine` that includes a **helper** and a **jquery plugin** to render the needed markup and javascript for a section with tabs in a easy and declarative way, forcing you to keep things simple and ensuring accessibility and usability, no matter if the content is loaded statically or via ajax.
 
+## FORKED FROM https://github.com/agoragames/bettertabs ##
+
+This version is a fork of the original Bettertabs gem by Mario Izquierdo.
+
+### Changes from the original version ###
+
+  * Generated markup includes a wrapper div around the `ul.tabs` element, that is needed in dio to style the tabs properly.
 
 ## Features ##
 

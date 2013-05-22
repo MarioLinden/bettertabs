@@ -113,18 +113,20 @@ class BettertabsBuilder
          @list_html_options ||= {}
          @list_html_options[:class] ||= ''
          @list_html_options[:class] += @list_html_options[:class].empty? ? 'tabs' : ' tabs'
-         content_tag(:ul, @list_html_options) do
-           @tabs.map do |tab|
-             content_tag(:li, class: ('active' if tab[:active]), id: tab_html_id_for(tab[:tab_id])) do
-               tab[:html_options][:"data-tab-type"] ||= tab[:tab_type] # for javascript: change click behavior depending on type :static, :link or :ajax
-               tab[:html_options][:"data-show-content-id"] ||= content_html_id_for(tab[:tab_id]) # for javascript: element id to show when select this tab
-               tab[:html_options][:"data-ajax-url"] ||= tab[:ajax_url] if tab[:tab_type] == :ajax # for javascript: url to make ajax call
-               tab[:html_options][:class] ||= ''
-               tab[:html_options][:class] += 'active' if tab[:active]
-               @template.link_to(tab[:text], tab[:url], tab[:html_options])
-             end
-           end.join.html_safe
-         end +
+         content_tag(:div, class: 'ul-tabs-wrapper') do
+           content_tag(:ul, @list_html_options) do
+             @tabs.map do |tab|
+               content_tag(:li, class: ('active' if tab[:active]), id: tab_html_id_for(tab[:tab_id])) do
+                 tab[:html_options][:"data-tab-type"] ||= tab[:tab_type] # for javascript: change click behavior depending on type :static, :link or :ajax
+                 tab[:html_options][:"data-show-content-id"] ||= content_html_id_for(tab[:tab_id]) # for javascript: element id to show when select this tab
+                 tab[:html_options][:"data-ajax-url"] ||= tab[:ajax_url] if tab[:tab_type] == :ajax # for javascript: url to make ajax call
+                 tab[:html_options][:class] ||= ''
+                 tab[:html_options][:class] += 'active' if tab[:active]
+                 @template.link_to(tab[:text], tab[:url], tab[:html_options])
+               end
+             end.join.html_safe
+           end
+        end +
 
          # Content sections
          @contents.map do |content|
